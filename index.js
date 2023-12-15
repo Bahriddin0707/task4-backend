@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -25,7 +26,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
