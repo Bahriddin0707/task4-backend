@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
-
+const crypto = require("crypto");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -18,6 +18,9 @@ app.use(
   })
 );
 
+// Generate a random JWT secret key
+const jwtSecretKey = crypto.randomBytes(32).toString("hex");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -26,7 +29,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));

@@ -45,11 +45,13 @@ router.post("/register", async (req, res) => {
       _id: user._id,
     };
 
-    res.status(201).json({
-      message: "Successfully Registered",
-      token,
-      user: simplifiedUser,
-    });
+    res
+      .status(201)
+      .json({
+        message: "Successfully Registered",
+        token,
+        user: simplifiedUser,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error });
@@ -84,7 +86,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "Sorry! You are blocked, you cannot access" });
     }
 
-    // Update last time of login
+    // Update last login time
     user.lastLogin = new Date();
     await user.save();
 
