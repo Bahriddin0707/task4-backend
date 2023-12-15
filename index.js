@@ -1,26 +1,33 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
-const connectDB = require("./config/db");
-require("dotenv").config();
-
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-/// connect to database
-connectDB();
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://bahriddin-task-4.onrender.com"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
-app.use(cors());
-
-// Body Parser
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Use route files
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 
-app.listen(PORT, console.log(`The server is running on ${PORT}`));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
+  })
+  .catch((error) => console.log(error));
