@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
-const crypto = require("crypto");
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -17,9 +17,6 @@ app.use(
     credentials: true,
   })
 );
-
-// Generate a random JWT secret key
-const jwtSecretKey = crypto.randomBytes(32).toString("hex");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
