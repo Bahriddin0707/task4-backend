@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://bahriddin-task-4.onrender.com"],
+    origin: ["http://localhost:5173", "https://itransition-task4.onrender.com"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
