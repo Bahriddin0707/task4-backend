@@ -10,6 +10,17 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// Enable CORS for all routes
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://itransition-task4-intern.netlify.app"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 app.use(
   cors({
     origin: [
