@@ -3,10 +3,13 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const crypto = require("crypto");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
+
+const secretKey = process.env.JWT_SECRET_KEY;
 
 const PORT = process.env.PORT || 3000;
 
