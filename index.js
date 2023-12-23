@@ -12,10 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://itransition-task4-intern.netlify.app",
-    ],
+    origin:"*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
