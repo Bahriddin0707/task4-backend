@@ -25,8 +25,10 @@ router.post("/register", async (req, res) => {
         .status(400)
         .json({ message: "Email is already registered. Please login!" });
     }
+
     // Hash the password before saving it
     const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create a new user
     const user = new User({
       name,
